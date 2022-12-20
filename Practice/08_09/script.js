@@ -13,17 +13,20 @@
  *  - Returns <figure> element to where function is called
  */
 
+// const { doc } = require('prettier');
+
 const frogpack = {
-  name: "Frog Backpack",
+  name: 'Frog Backpack',
   volume: 8,
-  color: "green",
+  color: 'green',
   pocketNum: 3,
   strapLength: {
     left: 10,
     right: 10,
   },
   lidOpen: false,
-  image: "../../assets/images/frog.svg",
+  image: '../../assets/images/frog.svg',
+  description: 'this is image',
   toggleLid: function (lidStatus) {
     this.lidOpen = lidStatus;
   },
@@ -53,7 +56,42 @@ const content = `
         frogpack.strapLength.right
       } inches</span></li>
       <li class="feature backpack__lid">Lid status:<span> ${
-        frogpack.lidOpen ? "open" : "closed"
+        frogpack.lidOpen ? 'open' : 'closed'
       }</span></li>
     </ul>  
 `;
+
+/*
+ * - Helper image function
+ *  - Creates new <figure> element
+ *  - Adds <img> markup pointing to frogpack.image
+ *  - Adds <figcaption> element with image description
+ *  - Returns <figure> element to where function is called
+ */
+
+const addFigure = (object) => {
+  let newFigure = document.createElement('figure');
+  let newImg = document.createElement('img');
+  newImg.setAttribute('src', object.image);
+  newImg.style.width = '200px';
+  let newFigCaption = document.createElement('figcaption');
+  newFigCaption.innerText = object.description;
+  newFigure.append(newImg, newFigCaption);
+  return newFigure;
+};
+
+/*
+ * - Main function
+ *  - Creates new <article> element
+ *  - Populates <article> with content (see const content below)
+ *  - Returns <article> element to where function is called
+ */
+
+const createArticle = (pack) => {
+  let newArticle = document.createElement('article');
+  newArticle.innerHTML = content;
+  newArticle.append(addFigure(pack));
+  return newArticle;
+};
+
+document.querySelector('main').append(createArticle(frogpack));
