@@ -8,9 +8,9 @@
  */
 
 const backpack = {
-  name: "Everyday Backpack",
+  name: 'Everyday Backpack',
   volume: 30,
-  color: "grey",
+  color: 'grey',
   pocketNum: 15,
   strapLength: {
     left: 26,
@@ -23,4 +23,20 @@ const backpack = {
     this.strapLength.left = lengthLeft;
     this.strapLength.right = lengthRight;
   },
+  changeName(name) {
+    this.name = name;
+  },
+  changeVolume(volume) {
+    this.volume = volume;
+  },
+  changeColor(color) {
+    this.color = color;
+  },
+  changePocketNum(pocketNum) {
+    this.pocketNum = pocketNum;
+  },
 };
+
+console.log(backpack);
+backpack.toggleLid(true);
+console.log(backpack);
