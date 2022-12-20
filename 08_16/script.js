@@ -5,55 +5,46 @@
  * - Set the inner HTML of the article to the existing HTML output provided in const content.
  * - Append each backpack object to the <main> element.
  */
-import Backpack from "./components/Backpack.js";
+import backpackObjectArray from './components/data.js';
 
-const everydayPack = new Backpack(
-  "pack01",
-  "Everyday Backpack",
-  30,
-  "grey",
-  15,
-  26,
-  26,
-  false,
-  "December 5, 2018 15:00:00 PST",
-  "../assets/images/everyday.svg"
-);
+const content = backpackObjectArray.map((backpack) => {
+  let backpackArticle = document.createElement('article');
+  backpackArticle.classList.add('backpack');
+  backpackArticle.setAttribute('id', backpack.id);
 
-const content = `
+  backpackArticle.innerHTML = `
     <figure class="backpack__image">
-      <img src=${everydayPack.image} alt="" />
+      <img src=${backpack.image} alt="" style="width: 200px"/>
     </figure>
-    <h1 class="backpack__name">${everydayPack.name}</h1>
+    <h1 class="backpack__name">${backpack.name}</h1>
     <ul class="backpack__features">
       <li class="packprop backpack__volume">Volume:<span> ${
-        everydayPack.volume
+        backpack.volume
       }l</span></li>
       <li class="packprop backpack__color">Color:<span> ${
-        everydayPack.color
+        backpack.color
       }</span></li>
-      <li class="backpack__age">Age:<span> ${everydayPack.backpackAge()} days old</span></li>
+      <li class="backpack__age">Age:<span> ${backpack.backpackAge()} days old</span></li>
       <li class="packprop backpack__pockets">Number of pockets:<span> ${
-        everydayPack.pocketNum
+        backpack.pocketNum
       }</span></li>
       <li class="packprop backpack__strap">Left strap length:<span> ${
-        everydayPack.strapLength.left
+        backpack.strapLength.left
       } inches</span></li>
       <li class="packprop backpack__strap">Right strap length:<span> ${
-        everydayPack.strapLength.right
+        backpack.strapLength.right
       } inches</span></li>
       <li class="feature backpack__lid">Lid status:<span> ${
-        everydayPack.lidOpen ? "open" : "closed"
+        backpack.lidOpen ? 'open' : 'closed'
       }</span></li>
     </ul>
-  
-`;
+  `;
 
-const main = document.querySelector(".maincontent");
+  return backpackArticle;
+});
 
-const newArticle = document.createElement("article");
-newArticle.classList.add("backpack");
-newArticle.setAttribute("id", "everyday");
-newArticle.innerHTML = content;
+const main = document.querySelector('.maincontent');
 
-main.append(newArticle);
+content.forEach((backpack) => {
+  main.append(backpack);
+});
